@@ -4,6 +4,7 @@
 * TS is a _structural type system_
 
 [_CodeSandbox for Chapter 1_](https://codesandbox.io/s/chapter-1-forked-4dmzqn?file=/index.js)
+
 ## 1.1 Red Squiggly Lines
 
 * purpose
@@ -73,7 +74,7 @@
     // other.
     ```
 
-# 1.4 Adding Types with JSDoc
+## 1.4 Adding Types with JSDoc
 
 * tool to anotate code using comments
 ```javascript
@@ -111,3 +112,92 @@
  > Types signal intention, define a contract, and make sure we use our program code in the way it was supposed to be.
 
 ---
+
+## 1.5 Type Declaration Files
+
+* up until now: tooling part of TypeScript – a type-checker, a language server giving feedback to code editors
+* TypeScript as a programming language
+	* calls itself superset of JavaScript
+	* can't be executed by a a browser or Node.js
+
+* custom type declarations
+	* can be very explicit about the shape
+	```typescript
+		type ShipStorage = {
+			max: number,
+			items: StorageItem[]
+		}
+
+		const storage = {
+			max: 6000,
+			items: []
+		}
+	```
+	* `storage` object has the _shape_ of a `ShipStorage` type
+	* type has a certain _ structure_
+* .d.ts files
+	* aka type declaration files
+	* add all custom types, but no extra program code
+	* _types.d.ts_ sits next to main JavaScript file
+	* to make them available export types
+	```typescript
+		export type StorageItem = {
+			weight: number
+		}
+		
+		export type ShipStorage = {
+			max: number,
+			items: StorageItem[]
+		}
+	```
+	* point to types by importing them in JSDoc comments
+	```javascript
+		/** @typedef { import('./types.d').ShipStorage } ShipStorage */
+		/** @typedef { import('./types.d').StorageItem } StorageItem */
+	```
+	* JS code hasn't changed -> fundamental principle of TypeScript: as easy as possible to add types to existing code
+
+* so far the simplest process:
+	* activate TS with `// @ts-check` 
+	* use JSDoc comment type annotations for all primitive & composite types
+	* create custom type definitons in type declaration files & load them as needed in JSDoc type annotations
+
+## 1.6 Ambient Declaraion Files
+
+* make globals known & defined, we can use ambient declarations
+* these types are encompassing, exitsing & present on all sides
+* in `ambient.d.ts` next to main JS file we can define function heads, global objects, variables we need throughout program
+	* e.g. a global flag like `isDevelopment` variable that is of type `boolean` & lets us log debug information
+	```typescript
+		declare const isDevelopment: boolean
+	```
+* `declare` is a keyword that tells TS that this constant exists
+* when using a library like jQuery, custom files can be installed via npm
+	```bash
+		npm i @types/jquery
+	```
+* types are being provided by a big community contributing custom types to almost all libraries that hasn't been written in TS
+
+## 1.7 Tooling
+
+* VSCode is set up to work with TypeScript out of the box, it's the "perfect TypeScript editor"
+* for others like Sublime, VIM or Atom the tooling is also available
+* tsc
+	* install TypeScript globally with `nom install --location=global typescript`
+		* with it we get tsc, the TS compiler
+		* compiles TS code to JS
+		* can also type-check JS programs outside of any editor
+		* as with any compiler flags & configurations can be set
+		* move type declaration files to folder called _@types_
+		* initialize project by running `tsc --init` -> create prefilled _tsconfig.json_ (main config file for TS)
+		* tsc & TypeScript refer to this file
+* tsconfig.json
+	* prefilled _tsconfig.json_ pretty good to get started, but let's make adjustments
+		* `target`: defines target language specification of JS TS should be compiled to (`ES2015`, `ESNEXT`, ...)
+		* `module`: how should modules be treated (`commonJS`, `es2020`, ...)
+		* `esModuleInterop`: strongly connected to module; want to mix modules from different modules systems, set this flag to true
+		* `allowJS`: allow reference to regular JS files
+		* `checkJS`: similar to `//@ts-check`; tells TS to type-check JS files
+* type-check code with `tsc --noEmit`
+* `noEmit` tells TS to _not_ output files
+* watch mode can be enabled with `tsc --noEmit --watch`
