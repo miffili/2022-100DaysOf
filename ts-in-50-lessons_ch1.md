@@ -162,7 +162,7 @@
 	* use JSDoc comment type annotations for all primitive & composite types
 	* create custom type definitons in type declaration files & load them as needed in JSDoc type annotations
 
-## 1.6 Ambient Declaraion Files
+## 1.6 Ambient Declaration Files
 
 * make globals known & defined, we can use ambient declarations
 * these types are encompassing, exitsing & present on all sides
