@@ -13,16 +13,16 @@
   * TypeScript in 50 Lessons [[🔗 Book](https://typescript-book.com/) | [📝 Notes](ts-in-50-lessons/ch1.md)]
   * with me being a more visual/practical person, I get why my way of communicating/thinking could lead to misunderstanding my abilities
 
-### Sep 4th
+## Sep 4th
  * motivation was low due to a long/energy-demanding day
  * TypeScript in 50 lessons:
   * tried to set up exercise/sample project, but got stuck somehow -> decided to let it go for now & keep moving forward
   * reset timer to 25% of total time to read through chapter 2 – lessons 8, 9, 10 without making notes 👍 – baby steps today
 
-### Sep 5th
+## Sep 5th
  🤧 sick day
 
-### Sep 6th
+## Sep 6th
  * still not feeling on top of things, so a light hour of reading 🤓
  * Austin Kleon's _Show Your Work_
   * aimed at artists, but actually useful to anyone who wants to improve their visibility
